@@ -1,0 +1,31 @@
+import ReactSpeedometer from 'react-d3-speedometer';
+import { primaryColor, lqsColors5 } from '../../utils/constants';
+import { TooltipBox } from '../../UI/TooltipBox/TooltipBox';
+import classes from './WebySpeedometr.module.css';
+
+export const WebySpeedometr = ({ value, loading, title, text }) => {
+  return (
+    <TooltipBox text={text}>
+      <div className={classes.dashboardTabBox}>
+        <p className={classes.dashboardTabHeader}>{title}</p>
+        {loading ? (
+          <div className={`${classes.speedometrContainer} skeleton-box`} />
+        ) : (
+          <ReactSpeedometer
+            value={value}
+            segments={value ? 5 : 1}
+            segmentColors={value ? lqsColors5 : ['#a7a19d']}
+            maxValue={100}
+            needleColor={value ? primaryColor : '#a7a19d'}
+            width={150}
+            height={85}
+            maxSegmentLabels={0}
+            needleHeightRatio={0.45}
+            currentValueText=""
+            ringWidth={15}
+          />
+        )}
+      </div>
+    </TooltipBox>
+  );
+};
